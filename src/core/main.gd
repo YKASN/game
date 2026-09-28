@@ -18,6 +18,7 @@ func show_menu() -> void:
 func show_narrative() -> void:
 	_replace_screen(NARRATIVE_SCENE)
 	active_screen.connect("menu_requested", show_menu)
+	active_screen.connect("restart_requested", show_narrative)
 
 
 func _replace_screen(scene: PackedScene) -> void:

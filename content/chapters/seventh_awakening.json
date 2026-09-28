@@ -1,0 +1,49 @@
+{
+  "id": "seventh_awakening",
+  "title": "第七次醒来",
+  "steps": [
+    { "id": "wake", "text": "你醒了。", "cue": "black" },
+    { "id": "seventh", "text": "这是今天第七次。", "pause_ms": 650 },
+    { "id": "remember", "text": "你记得前六次。" },
+    { "id": "first_blank", "text": "唯独第一次，像被谁轻轻擦掉了。", "pause_ms": 700 },
+    { "id": "lamp", "text": "一盏灯在房间里轻轻摇晃。", "cue": "reveal_room" },
+    { "id": "room_rule", "text": "每一次醒来，房间都会少一样东西。" },
+    { "id": "first", "text": "第一次，少了一扇窗。" },
+    { "id": "window", "text": "墙上原来有窗的地方，慢慢只剩下一道白线。", "cue": "remove_window" },
+    { "id": "air", "text": "风却还在吹。" },
+    { "id": "second", "text": "第二次，少了一张桌子。", "cue": "remove_table" },
+    { "id": "floor", "text": "地上还留着四道桌脚的印子。" },
+    { "id": "third", "text": "第三次，少了一面镜子。", "cue": "remove_mirror" },
+    { "id": "reflection", "text": "从那以后，你再也没有看见过自己。" },
+    { "id": "fourth", "text": "第四次以后，少掉的东西开始变得奇怪。" },
+    { "id": "fifth", "text": "第五次。" },
+    { "id": "yesterday", "text": "少了昨天。", "cue": "empty_bubble", "pause_ms": 1200 },
+    { "id": "word", "text": "你还会说“昨天”，却想不起那一天的任何事。" },
+    { "id": "sixth", "text": "第六次。" },
+    { "id": "person", "text": "少了一个人。", "pause_ms": 950 },
+    { "id": "quiet", "text": "房间没有变大，却突然空得让人害怕。" },
+    { "id": "uncertain", "text": "你不确定。" },
+    { "id": "self", "text": "那个人是不是你。", "pause_ms": 950 },
+    { "id": "voice_arrives", "speaker": "声音", "text": "你终于醒了。", "cue": "voice" },
+    { "id": "ask_who", "speaker": "你", "text": "你是谁？" },
+    { "id": "voice_unknown", "speaker": "声音", "text": "我不知道。" },
+    { "id": "ask_how", "speaker": "你", "text": "那你为什么知道我醒了？" },
+    { "id": "voice_every", "speaker": "声音", "text": "因为每一次醒来，" },
+    { "id": "voice_breath", "speaker": "声音", "text": "都是我先听见你的呼吸。", "pause_ms": 800 }
+  ],
+  "choices": [
+    { "id": "trust", "text": "相信它。" },
+    { "id": "doubt", "text": "怀疑它。" }
+  ],
+  "branches": {
+    "trust": { "id": "trust_reply", "text": "你第一次没问为什么，只问：下一次醒来，会少什么？" },
+    "doubt": { "id": "doubt_reply", "text": "你第一次没有害怕，只想知道：是谁在记录这些次数？" }
+  },
+  "ending": [
+    { "id": "lights_out", "text": "灯灭了。", "cue": "lights_out", "pause_ms": 700 },
+    { "id": "last_wake", "text": "第七次醒来。" },
+    { "id": "nothing", "text": "房间什么都没有少。", "pause_ms": 850 },
+    { "id": "because", "text": "因为这一次。", "pause_ms": 950 },
+    { "id": "you", "text": "少的是你。", "cue": "vanish", "pause_ms": 1000 }
+  ]
+}

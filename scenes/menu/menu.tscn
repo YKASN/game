@@ -59,7 +59,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.4, 0.38, 1)
 theme_override_font_sizes/font_size = 13
-text = "一段可点击的故事"
+text = "一段关于消失的故事"
 
 [node name="TopSpacer" type="Control" parent="Layout/Column"]
 layout_mode = 2
@@ -73,19 +73,19 @@ theme_override_constants/separation = 17
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.38, 0.35, 1)
 theme_override_font_sizes/font_size = 15
-text = "序章  /  PROLOGUE"
+text = "文字实验  /  DEMO"
 
 [node name="Title" type="Label" parent="Layout/Column/TitleBlock"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
 theme_override_font_sizes/font_size = 64
-text = "没有钟的房间"
+text = "第七次醒来"
 
 [node name="Subtitle" type="Label" parent="Layout/Column/TitleBlock"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.4, 0.38, 1)
 theme_override_font_sizes/font_size = 17
-text = "有些声音，只在你停下时才会出现。"
+text = "每次醒来，房间都会少一样东西。"
 
 [node name="BottomSpacer" type="Control" parent="Layout/Column"]
 layout_mode = 2

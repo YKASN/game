@@ -1,4 +1,4 @@
-"""Generate the two tiny procedural sounds used by the first playable shell."""
+"""Generate the small procedural sounds used by the narrative demo."""
 
 from __future__ import annotations
 
@@ -53,6 +53,33 @@ def clock_tick() -> list[float]:
     return result
 
 
+def breath_loop() -> list[float]:
+    rng = random.Random(72)
+    count = int(3.2 * RATE)
+    result: list[float] = []
+    filtered = 0.0
+    for i in range(count):
+        t = i / RATE
+        filtered = filtered * 0.97 + rng.uniform(-1, 1) * 0.03
+        envelope = (0.5 - 0.5 * math.cos(2 * math.pi * t / 3.2)) ** 1.5
+        result.append(filtered * envelope * 0.28)
+    return result
+
+
+def brush_stroke() -> list[float]:
+    rng = random.Random(18)
+    count = int(0.32 * RATE)
+    result: list[float] = []
+    filtered = 0.0
+    for i in range(count):
+        t = i / RATE
+        filtered = filtered * 0.62 + rng.uniform(-1, 1) * 0.38
+        envelope = math.sin(math.pi * t / 0.32) ** 2
+        result.append(filtered * envelope * 0.22)
+    return result
+
+
 if __name__ == "__main__":
     write_wav("paper_click.wav", paper_click())
-    write_wav("clock_tick.wav", clock_tick())
+    write_wav("breath_loop.wav", breath_loop())
+    write_wav("brush_stroke.wav", brush_stroke())
