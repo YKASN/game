@@ -2,11 +2,10 @@ extends Node
 
 const PAPER_STREAM: AudioStream = preload("res://assets/audio/paper_click.wav")
 const TICK_STREAM: AudioStreamWAV = preload("res://assets/audio/clock_tick.wav")
-const PAPER := Color(0.953, 0.949, 0.933, 1)
-const DARK := Color(0.085, 0.085, 0.085, 1)
+const BLACK := Color(0, 0, 0, 1)
 
 @onready var background: ColorRect = $"../Background"
-@onready var room_art: Node2D = $"../RoomArt"
+@onready var room_art: Control = $"../Layout/Column/SceneArea/RoomArt"
 @onready var paper_sound: AudioStreamPlayer = $PaperSound
 @onready var tick_sound: AudioStreamPlayer = $TickSound
 
@@ -25,14 +24,12 @@ func play_paper() -> void:
 
 
 func apply_cue(cue: String) -> void:
+	background.color = BLACK
 	match cue:
 		"dark":
-			background.color = DARK
-			room_art.modulate.a = 0.0
+			room_art.modulate.a = 0.55
 		"reveal_room":
-			var tween := create_tween().set_parallel(true)
-			tween.tween_property(background, "color", PAPER, 0.6)
-			tween.tween_property(room_art, "modulate:a", 1.0, 0.7)
+			create_tween().tween_property(room_art, "modulate:a", 1.0, 0.7)
 		"start_tick":
 			room_art.call("set_clock_visible", true)
 			tick_sound.play()

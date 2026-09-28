@@ -1,6 +1,7 @@
 {
   "id": "prologue",
   "title": "没有钟的房间",
+  "choices": ["我听见了钟声。", "我听见了自己的心跳。"],
   "steps": [
     { "id": "wake", "text": "你醒了。", "cue": "dark" },
     { "id": "room", "text": "房间里很安静。", "cue": "reveal_room" },

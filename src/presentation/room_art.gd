@@ -1,14 +1,16 @@
-extends Node2D
+extends Control
 
-const INK := Color(0.16, 0.16, 0.16, 1)
-const LIGHT := Color(0.16, 0.16, 0.16, 0.34)
-const PALE := Color(0.16, 0.16, 0.16, 0.12)
+const INK := Color(0.96, 0.96, 0.96, 1.0)
+const DIM := Color(0.68, 0.68, 0.68, 0.72)
+const FAINT := Color(0.5, 0.5, 0.5, 0.42)
 
 var clock_visible := false
+var phase := 0.0
 
 
-func _ready() -> void:
-	get_viewport().size_changed.connect(queue_redraw)
+func _process(delta: float) -> void:
+	phase += delta
+	queue_redraw()
 
 
 func set_clock_visible(value: bool) -> void:
@@ -17,24 +19,34 @@ func set_clock_visible(value: bool) -> void:
 
 
 func _draw() -> void:
-	var size := get_viewport_rect().size
-	var floor_y := size.y * 0.63
-	var left := size.x * 0.18
-	var right := size.x * 0.87
-	draw_line(Vector2(left, floor_y), Vector2(right, floor_y), INK, 1.4, true)
-	draw_line(Vector2(left, floor_y), Vector2(left, size.y * 0.19), LIGHT, 1.2, true)
-	draw_line(Vector2(left, size.y * 0.19), Vector2(right, size.y * 0.19), PALE, 1.0, true)
-	draw_line(Vector2(right, size.y * 0.19), Vector2(right, floor_y), LIGHT, 1.0, true)
-	var door_x := size.x * 0.31
-	draw_rect(Rect2(door_x, size.y * 0.31, size.x * 0.13, floor_y - size.y * 0.31), Color.TRANSPARENT, false, 1.4, true)
-	draw_circle(Vector2(door_x + size.x * 0.11, size.y * 0.51), 2.4, LIGHT)
-	for i in range(2):
-		var y := floor_y + 14.0 + i * 18.0
-		draw_line(Vector2(left + i * 8.0, y), Vector2(right - i * 15.0, y), PALE, 0.8, true)
+	if size.x <= 0.0 or size.y <= 0.0:
+		return
+	var left := size.x * 0.20
+	var right := size.x * 0.80
+	var ceiling := size.y * 0.12
+	var floor_y := size.y * 0.78
+	var sway := sin(phase * 1.3) * 1.2
+	# A few imperfect strokes keep the room readable against pure black.
+	draw_line(Vector2(left, floor_y), Vector2(right, floor_y + sway), INK, 1.7, true)
+	draw_line(Vector2(left, ceiling), Vector2(left + sway, floor_y), DIM, 1.5, true)
+	draw_line(Vector2(left, ceiling), Vector2(right, ceiling + sway), FAINT, 1.3, true)
+	draw_line(Vector2(right, ceiling), Vector2(right, floor_y), DIM, 1.5, true)
+	var door_left := size.x * 0.31
+	var door_right := size.x * 0.40
+	var door_top := size.y * 0.31
+	draw_line(Vector2(door_left, floor_y), Vector2(door_left, door_top), INK, 1.8, true)
+	draw_line(Vector2(door_left, door_top), Vector2(door_right, door_top + sway), INK, 1.8, true)
+	draw_line(Vector2(door_right, door_top + sway), Vector2(door_right, floor_y), INK, 1.8, true)
+	draw_circle(Vector2(door_right - 13, floor_y - 44), 2.3, INK)
+	# A hanging light gently moves while the narration is still.
+	var lamp_x := size.x * 0.55 + sin(phase * 0.9) * 2.0
+	draw_line(Vector2(size.x * 0.55, ceiling), Vector2(lamp_x, size.y * 0.32), FAINT, 1.2, true)
+	draw_arc(Vector2(lamp_x, size.y * 0.34), size.y * 0.045, 0.0, PI, 20, DIM, 1.6, true)
+	draw_line(Vector2(left + 9, floor_y + 18), Vector2(right - 10, floor_y + 18), FAINT, 1.0, true)
 	if clock_visible:
-		var c := Vector2(size.x * 0.68, size.y * 0.34)
-		var r := minf(size.x, size.y) * 0.085
-		draw_arc(c, r, 0, TAU, 90, INK, 1.4, true)
-		draw_line(c, c + Vector2(0, -r * 0.64), INK, 1.5, true)
-		draw_line(c, c + Vector2(r * 0.43, r * 0.12), INK, 1.5, true)
-		draw_circle(c, 2.4, INK)
+		var center := Vector2(size.x * 0.69, size.y * 0.40)
+		var radius := minf(size.x, size.y) * 0.13
+		draw_arc(center, radius, 0.0, TAU, 72, INK, 2.0, true)
+		draw_line(center, center + Vector2(0, -radius * 0.58), INK, 1.7, true)
+		draw_line(center, center + Vector2(radius * 0.47, sin(phase * 1.5) * 2.0), INK, 1.7, true)
+		draw_circle(center, 2.5, INK)

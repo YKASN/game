@@ -4,16 +4,13 @@
 [ext_resource type="Script" path="res://src/presentation/room_art.gd" id="2_room"]
 [ext_resource type="Script" path="res://src/presentation/presentation_controller.gd" id="3_presentation"]
 [ext_resource type="Theme" path="res://themes/paper.tres" id="4_theme"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+[ext_resource type="Script" path="res://src/interaction/speech_bubble.gd" id="5_bubble"]
 
 [node name="Narrative" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("4_theme")
 script = ExtResource("1_screen")
 
@@ -22,14 +19,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2
-color = Color(0.085, 0.085, 0.085, 1)
-
-[node name="RoomArt" type="Node2D" parent="."]
-modulate = Color(1, 1, 1, 0)
-script = ExtResource("2_room")
+color = Color(0, 0, 0, 1)
 
 [node name="Presentation" type="Node" parent="."]
 script = ExtResource("3_presentation")
@@ -45,24 +36,21 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 78
-theme_override_constants/margin_top = 56
-theme_override_constants/margin_right = 78
-theme_override_constants/margin_bottom = 56
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
 
 [node name="Column" type="VBoxContainer" parent="Layout"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="Header" type="HBoxContainer" parent="Layout/Column"]
 layout_mode = 2
 
 [node name="SceneLabel" type="Label" parent="Layout/Column/Header"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.83, 0.83, 0.83, 1)
-theme_override_font_sizes/font_size = 13
-text = "SCENE / 01"
+text = "序章  /  没有钟的房间"
 
 [node name="HeaderSpacer" type="Control" parent="Layout/Column/Header"]
 layout_mode = 2
@@ -70,67 +58,121 @@ size_flags_horizontal = 3
 
 [node name="BackButton" type="Button" parent="Layout/Column/Header"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.83, 0.83, 0.83, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 14
+mouse_default_cursor_shape = 2
 text = "返回封面  ↖"
 flat = true
 
-[node name="BodySpace" type="Control" parent="Layout/Column"]
+[node name="SceneArea" type="Control" parent="Layout/Column"]
+custom_minimum_size = Vector2(0, 235)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="StoryBlock" type="VBoxContainer" parent="Layout/Column"]
+[node name="RoomArt" type="Control" parent="Layout/Column/SceneArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("2_room")
+
+[node name="StoryPanel" type="VBoxContainer" parent="Layout/Column"]
+custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 8
 
-[node name="Progress" type="Label" parent="Layout/Column/StoryBlock"]
+[node name="StoryHeader" type="HBoxContainer" parent="Layout/Column/StoryPanel"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
-theme_override_font_sizes/font_size = 13
-text = "01 / 05"
 
-[node name="TextButton" type="Button" parent="Layout/Column/StoryBlock"]
-custom_minimum_size = Vector2(0, 100)
+[node name="StoryTitle" type="Label" parent="Layout/Column/StoryPanel/StoryHeader"]
+layout_mode = 2
+text = "故事"
+
+[node name="StoryHeaderSpacer" type="Control" parent="Layout/Column/StoryPanel/StoryHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Progress" type="Label" parent="Layout/Column/StoryPanel/StoryHeader"]
+layout_mode = 2
+text = "01 / 05"
+
+[node name="StoryScroll" type="ScrollContainer" parent="Layout/Column/StoryPanel"]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="StoryLines" type="VBoxContainer" parent="Layout/Column/StoryPanel/StoryScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="StoryFooter" type="HBoxContainer" parent="Layout/Column/StoryPanel"]
+layout_mode = 2
+
+[node name="Hint" type="Label" parent="Layout/Column/StoryPanel/StoryFooter"]
+layout_mode = 2
+text = "点击当前文字继续 · 向上滚动回看"
+
+[node name="StoryFooterSpacer" type="Control" parent="Layout/Column/StoryPanel/StoryFooter"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AdvanceButton" type="Button" parent="Layout/Column/StoryPanel/StoryFooter"]
+layout_mode = 2
 mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(0.96, 0.96, 0.96, 1)
-theme_override_colors/font_hover_color = Color(0.96, 0.96, 0.96, 1)
-theme_override_colors/font_focus_color = Color(0.96, 0.96, 0.96, 1)
-theme_override_font_sizes/font_size = 36
-theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
-text = "你醒了。"
+text = "继续  ↗"
 flat = true
-alignment = 0
-autowrap_mode = 3
 
-[node name="Hint" type="Label" parent="Layout/Column/StoryBlock"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
-theme_override_font_sizes/font_size = 13
-text = "点击这句话，继续阅读  ↗"
-
-[node name="EndBlock" type="VBoxContainer" parent="Layout/Column/StoryBlock"]
+[node name="ChoiceBar" type="HBoxContainer" parent="Layout/Column"]
 visible = false
+custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
-theme_override_constants/separation = 16
+alignment = 1
+theme_override_constants/separation = 65
 
-[node name="EndLabel" type="Label" parent="Layout/Column/StoryBlock/EndBlock"]
+[node name="ChoiceLeft" type="Button" parent="Layout/Column/ChoiceBar"]
+custom_minimum_size = Vector2(330, 116)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.14, 0.14, 0.14, 1)
-theme_override_font_sizes/font_size = 32
-text = "—— 这一页结束了。"
-
-[node name="ReturnButton" type="Button" parent="Layout/Column/StoryBlock/EndBlock"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.28, 0.28, 0.28, 1)
-theme_override_colors/font_hover_color = Color(0.14, 0.14, 0.14, 1)
-theme_override_font_sizes/font_size = 16
-text = "返回封面  ↖"
+mouse_default_cursor_shape = 2
 flat = true
-alignment = 0
+script = ExtResource("5_bubble")
 
-[node name="FooterSpace" type="Control" parent="Layout/Column"]
-custom_minimum_size = Vector2(0, 36)
+[node name="ChoiceRight" type="Button" parent="Layout/Column/ChoiceBar"]
+custom_minimum_size = Vector2(330, 116)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+flat = true
+script = ExtResource("5_bubble")
+
+[node name="ChoiceStage" type="Control" parent="Layout/Column"]
+visible = false
+custom_minimum_size = Vector2(0, 145)
+layout_mode = 2
+
+[node name="SelectedBubble" type="Button" parent="Layout/Column/ChoiceStage"]
+visible = false
+offset_right = 380.0
+offset_bottom = 128.0
+mouse_default_cursor_shape = 2
+flat = true
+script = ExtResource("5_bubble")
+
+[node name="ChoiceEditor" type="LineEdit" parent="Layout/Column/ChoiceStage/SelectedBubble"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 38.0
+offset_right = -42.0
+offset_bottom = -38.0
+alignment = 1
+flat = true
+placeholder_text = "写下你的回答"
+
+[node name="Footer" type="Label" parent="Layout/Column"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "向故事靠近一点"

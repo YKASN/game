@@ -1,7 +1,7 @@
 extends Node2D
 
-const INK := Color(0.14, 0.14, 0.14, 0.18)
-const FAINT := Color(0.14, 0.14, 0.14, 0.08)
+const INK := Color(0.96, 0.96, 0.96, 0.84)
+const FAINT := Color(0.96, 0.96, 0.96, 0.34)
 
 
 func _ready() -> void:

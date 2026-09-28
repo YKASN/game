@@ -4,6 +4,7 @@ signal step_changed(step: Dictionary, index: int, total: int)
 signal completed
 
 var steps: Array[Dictionary] = []
+var choices: Array[String] = []
 var current_index := -1
 
 
@@ -17,9 +18,13 @@ func load_chapter(path: String) -> bool:
 		push_error("Invalid chapter JSON: " + path)
 		return false
 	steps.clear()
+	choices.clear()
 	for item in content.get("steps", []):
 		if typeof(item) == TYPE_DICTIONARY and item.has("text"):
 			steps.append(item)
+	for choice in content.get("choices", []):
+		if typeof(choice) == TYPE_STRING:
+			choices.append(choice)
 	current_index = -1
 	return not steps.is_empty()
 
