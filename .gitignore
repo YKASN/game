@@ -1,0 +1,12 @@
+# Godot editor cache and local exports
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+*.translation
+
+# Local tools and OS files
+.DS_Store
+Thumbs.db
+.repo_memory/
+.memorax-code/
