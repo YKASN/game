@@ -1,0 +1,128 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/core/menu.gd" id="1_menu"]
+[ext_resource type="Script" path="res://src/presentation/menu_art.gd" id="2_art"]
+[ext_resource type="Theme" path="res://themes/paper.tres" id="3_theme"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.953, 0.949, 0.933, 1)
+
+[node name="InkArt" type="Node2D" parent="."]
+script = ExtResource("2_art")
+
+[node name="Layout" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 78
+theme_override_constants/margin_top = 56
+theme_override_constants/margin_right = 78
+theme_override_constants/margin_bottom = 56
+
+[node name="Column" type="VBoxContainer" parent="Layout"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Layout/Column"]
+layout_mode = 2
+
+[node name="Issue" type="Label" parent="Layout/Column/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.29, 0.28, 1)
+theme_override_font_sizes/font_size = 13
+text = "INK / 001"
+
+[node name="HeaderSpacer" type="Control" parent="Layout/Column/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Edition" type="Label" parent="Layout/Column/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.4, 0.38, 1)
+theme_override_font_sizes/font_size = 13
+text = "一段可点击的故事"
+
+[node name="TopSpacer" type="Control" parent="Layout/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TitleBlock" type="VBoxContainer" parent="Layout/Column"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="Overline" type="Label" parent="Layout/Column/TitleBlock"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.38, 0.35, 1)
+theme_override_font_sizes/font_size = 15
+text = "序章  /  PROLOGUE"
+
+[node name="Title" type="Label" parent="Layout/Column/TitleBlock"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+theme_override_font_sizes/font_size = 64
+text = "没有钟的房间"
+
+[node name="Subtitle" type="Label" parent="Layout/Column/TitleBlock"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.4, 0.38, 1)
+theme_override_font_sizes/font_size = 17
+text = "有些声音，只在你停下时才会出现。"
+
+[node name="BottomSpacer" type="Control" parent="Layout/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Footer" type="HBoxContainer" parent="Layout/Column"]
+layout_mode = 2
+alignment = 0
+
+[node name="StartBlock" type="VBoxContainer" parent="Layout/Column/Footer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="StartButton" type="Button" parent="Layout/Column/Footer/StartBlock"]
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+theme_override_colors/font_hover_color = Color(0.12, 0.12, 0.12, 1)
+theme_override_colors/font_focus_color = Color(0.12, 0.12, 0.12, 1)
+theme_override_font_sizes/font_size = 22
+text = "开始阅读  ↗"
+flat = true
+
+[node name="Underline" type="ColorRect" parent="Layout/Column/Footer/StartBlock"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.14, 0.14, 0.14, 1)
+
+[node name="FooterSpacer" type="Control" parent="Layout/Column/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hint" type="Label" parent="Layout/Column/Footer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.46, 0.43, 1)
+theme_override_font_sizes/font_size = 13
+text = "用鼠标触碰文字，故事才会继续"

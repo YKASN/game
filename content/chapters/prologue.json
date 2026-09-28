@@ -1,0 +1,11 @@
+{
+  "id": "prologue",
+  "title": "没有钟的房间",
+  "steps": [
+    { "id": "wake", "text": "你醒了。", "cue": "dark" },
+    { "id": "room", "text": "房间里很安静。", "cue": "reveal_room" },
+    { "id": "tick", "text": "除了钟。", "cue": "start_tick" },
+    { "id": "absence", "text": "但这里没有钟。", "cue": "stop_tick" },
+    { "id": "question", "text": "你听见的，究竟是什么？", "cue": "none" }
+  ]
+}
